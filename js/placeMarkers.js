@@ -11,7 +11,7 @@ var APP_TOKEN = 'I4DSpFA3uVR5D3j4jSLliGPq4';
 
     var typeIcon = L.Icon.extend({
       options: {
-              iconSize: [20, 20]
+              iconSize: [30, 30]
       }
     })
 
@@ -19,7 +19,9 @@ var APP_TOKEN = 'I4DSpFA3uVR5D3j4jSLliGPq4';
     var foodIcon = new typeIcon({iconUrl: 'icons/food-icon.png'}),
           drinkIcon = new typeIcon({iconUrl: 'icons/drink-icon.png'});
 
-    function fillMapFood(map) {
+    var markers = new L.MarkerClusterGroup();
+
+    function fillMapFood(map, startDate) {
       $.ajax({
         url: 'https://opendata.socrata.com/resource/kwzk-xvba?$$app_token=' + APP_TOKEN,
         type: 'GET',
@@ -27,7 +29,6 @@ var APP_TOKEN = 'I4DSpFA3uVR5D3j4jSLliGPq4';
         data: {
         },
         success: function (json) {
-          var unplotted = 0;
 
           for (var i=0; i< json.length; i++) {
 
@@ -35,13 +36,18 @@ var APP_TOKEN = 'I4DSpFA3uVR5D3j4jSLliGPq4';
             var lat = Number(arrayCoord[0].replace("(", ""));
             var lng = Number(arrayCoord[1].replace(")",""));
 
-            L.marker([lat, lng], {icon: foodIcon}).addTo(map).bindPopup(json[i]['businessname'] + "<br />" + json[i]['address']);
+            //checks to see if business' license started before given date
+            if (json[i]['licenseadddttm'] < startDate){
+            fMarker = new L.marker([lat, lng], {icon: foodIcon}).addTo(markers).bindPopup(json[i]['businessname'] + "<br />" + json[i]['address']);
+            markers.addLayers(fMarker);
+            }
         }
       }
       });
     }
 
-    function fillMapLiquor(map) {
+
+    function fillMapLiquor(map, startDate) {
       $.ajax({
         url: 'https://opendata.socrata.com/resource/n2ib-bm5m?$$app_token=' + APP_TOKEN,
         type: 'GET',
@@ -49,20 +55,28 @@ var APP_TOKEN = 'I4DSpFA3uVR5D3j4jSLliGPq4';
         data: {
         },
         success: function (json) {
-          var unplotted = 0;
 
           for (var i=0; i< json.length; i++) {
 
-
+            if(json[i]['location'] != null) {
             var arrayCoord = json[i]['location'].split(",");
+            }
+
             var lat = Number(arrayCoord[0].replace("(", ""));
             var lng = Number(arrayCoord[1].replace(")",""));
 
-            L.marker([lat, lng], {icon: drinkIcon}).addTo(map).bindPopup(json[i]['businessname']);
-        }
+            //checks to see if business' license started before given date
+            if (json[i]['issdttm'] < startDate){
+            lMarker = new L.marker([lat, lng], {icon: drinkIcon}).addTo(markers).bindPopup(json[i]['businessname']);
+            markers.addLayers(lMarker);
+            }
+          }
       }
       });
     }
 
-    fillMapFood(map);
-    fillMapLiquor(map);
+    map.addLayer(markers);
+
+    function resetMap() {
+      markers.clearLayers();
+    }

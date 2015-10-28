@@ -4,19 +4,78 @@
   <title>Soofa Front-End Development Challenge</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href='https://api.mapbox.com/mapbox.js/v2.2.2/mapbox.css' rel='stylesheet' />
   <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+  <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css' rel='stylesheet' />
+  <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' rel='stylesheet' />
 
 </head>
 <body>
+
   <div id="map" style="width: 1200px; height: 600px"></div>
-  <div id="mapLabel">Legend: <ul>
-                      <li><img src="icons/food-icon.png" /> Active Boston Food Establishment Locations</li>
-                      <li><img src="icons/drink-icon.png" />Active Boston Liquor License Locations</li>
-                      </div>
+  <div id="mapLabel">Legend:
+    <ul>
+      <li><img src="icons/food-icon.png" /> Active Boston Food Establishment Locations</li>
+      <li><img src="icons/drink-icon.png" />Active Boston Liquor License Locations</li>
+    </ul>
+  </div>
+  <button id="June2006">June 2006</button>
+  <button id="Before2007">December 2006</button>
+  <button id="June2010">June 2010</button>
+  <button id="Before2011">December 2010</button>
+  <button id="June2014">June 2014</button>
+  <button id="Before2015">December 2014</button>
+  <button id="All">All Current</button>
+
 
   <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+  <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
   <script src="js/jquery-2.1.4.js"></script>
   <script src="js/placeMarkers.js"></script>
+  <script type="text/javascript">
+  $('#June2006').click( function (e) {
+    resetMap();
+    fillMapFood(map, Date(2006, 7, 1));
+    fillMapLiquor(map, Date(2007, 1, 1));
+    });
+
+  $('#Before2007').click( function (e) {
+    resetMap();
+    fillMapFood(map, Date(2007, 1, 1));
+    fillMapLiquor(map, Date(2007, 1, 1));
+    });
+
+  $('#June2010').click( function (e) {
+    resetMap();
+    fillMapFood(map, Date(2010, 7, 1));
+    fillMapLiquor(map, Date(2007, 1, 1));
+    });
+
+  $('#Before2011').click( function (e) {
+    resetMap();
+    fillMapFood(map, Date(2011, 1, 1));
+    fillMapLiquor(map, Date(2011, 1, 1));
+    });
+
+  $('#June2014').click( function (e) {
+    resetMap();
+    fillMapFood(map, Date(2014, 7, 1));
+    fillMapLiquor(map, Date(2007, 1, 1));
+    });
+
+  $('#Before2015').click( function (e) {
+    resetMap();
+    fillMapFood(map, Date(2015, 1, 1));
+    fillMapLiquor(map, Date(2015, 1, 1));
+    });
+
+  $('#All').click( function (e) {
+    resetMap();
+    fillMapFood(map, Date(2016, 1, 1));
+    fillMapLiquor(map, Date(2016, 1, 1));
+    });
+  </script>
 
 </body>
 </html>
