@@ -30,33 +30,41 @@ var APP_TOKEN = 'I4DSpFA3uVR5D3j4jSLliGPq4';
         },
         success: function (json) {
 
+          var d = new Date(startDate);
+
           for (var i=0; i< json.length; i++) {
 
             var arrayCoord = json[i]['coordinates'].split(",");
             var lat = Number(arrayCoord[0].replace("(", ""));
             var lng = Number(arrayCoord[1].replace(")",""));
 
-            var licenseDate = json[i]['licenseadddttm'];
+            if( json[i]['licenseadddttm'] != null) {
+            var jsonDate = JSON.stringify(json[i]['licenseadddttm']);
+            var parsedJsonDate = JSON.parse(jsonDate);
+            var licenseDate = new Date(parsedJsonDate);
 
-            //checks to see if business' license started before given date
-            if (licenseDate < startDate){
-            fMarker = new L.marker([lat, lng], {icon: foodIcon}).addTo(markers).bindPopup(json[i]['businessname'] + "<br />" + json[i]['address']);
-            markers.addLayers(fMarker);
+              //checks to see if business' license started before given date
+              if (licenseDate < d){
+              fMarker = new L.marker([lat, lng], {icon: foodIcon}).addTo(markers).bindPopup("<b>" + json[i]['businessname'] + "</b><br />" + json[i]['address']);
+              markers.addLayers(fMarker);
+              }
             }
+          }
         }
-      }
       });
     }
 
 
     function fillMapLiquor(map, startDate) {
       $.ajax({
-        url: 'https://opendata.socrata.com/resource/n2ib-bm5m?$$app_token=' + APP_TOKEN,
+        url: 'https://opendata.socrata.com/resource/n2ib-bm5m.json?$$app_token=' + APP_TOKEN,
         type: 'GET',
         dataType: 'json',
         data: {
         },
         success: function (json) {
+
+          var d = new Date(startDate);
 
           for (var i=0; i< json.length; i++) {
 
@@ -67,15 +75,19 @@ var APP_TOKEN = 'I4DSpFA3uVR5D3j4jSLliGPq4';
             var lat = Number(arrayCoord[0].replace("(", ""));
             var lng = Number(arrayCoord[1].replace(")",""));
 
-            var licenseDate = json[i]['issdttm'];
+            if(json[i]["issdttm"] != null) {
+            var jsonDate = JSON.stringify(json[i]['issdttm']);
+            var parsedJsonDate = JSON.parse(jsonDate);
+            var licenseDate = new Date(parsedJsonDate);
 
-            //checks to see if business' license started before given date
-            if (licenseDate < startDate){
-            lMarker = new L.marker([lat, lng], {icon: drinkIcon}).addTo(markers).bindPopup(json[i]['businessname']);
-            markers.addLayers(lMarker);
+              //checks to see if business' license started before given date
+              if (licenseDate < d){
+              lMarker = new L.marker([lat, lng], {icon: drinkIcon}).addTo(markers).bindPopup("<b>" + json[i]['businessname'] + "</b>");
+              markers.addLayers(lMarker);
+              }
             }
           }
-      }
+        }
       });
     }
 

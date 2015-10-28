@@ -28,48 +28,48 @@
   <button id="All">All Current</button>
 
 
+  <script src="js/jquery-2.1.4.js"></script>
   <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
   <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
-  <script src="js/jquery-2.1.4.js"></script>
+  <script src="js/dateFormat.js"></script>
   <script src="js/placeMarkers.js"></script>
   <script type="text/javascript">
   //buttons that display the number of active establishments open before a given date
 
-
   $('#Before2007').click( function (e) {
     resetMap();
-    fillMapFood(map, Date("01/01/2007 00:00:00 AM"));
-    fillMapLiquor(map, Date("01/01/2007 00:00:00 AM"));
+    fillMapFood(map, "01/01/2007");
+    fillMapLiquor(map, "01/01/2007");
     });
 
   $('#June2010').click( function (e) {
     resetMap();
-    fillMapFood(map, Date("07/01/2010 00:00:00 AM"));
-    fillMapLiquor(map, Date("07/01/2010 00:00:00 AM"));
+    fillMapFood(map, "07/01/2010");
+    fillMapLiquor(map, "07/01/2010");
     });
 
   $('#Before2011').click( function (e) {
     resetMap();
-    fillMapFood(map, Date("01/01/2011 00:00:00 AM"));
-    fillMapLiquor(map, Date("01/01/2011 00:00:00 AM"));
+    fillMapFood(map, "01/01/2011");
+    fillMapLiquor(map, "01/01/2011");
     });
 
   $('#June2014').click( function (e) {
     resetMap();
-    fillMapFood(map, Date("07/01/2014 00:00:00 AM"));
-    fillMapLiquor(map, Date("07/01/2014 00:00:00 AM"));
+    fillMapFood(map, "07/01/2014");
+    fillMapLiquor(map, "07/01/2014");
     });
 
   $('#Before2015').click( function (e) {
     resetMap();
-    fillMapFood(map, Date("01/01/2015 00:00:00 AM"));
-    fillMapLiquor(map, Date("01/01/2015 00:00:00 AM"));
+    fillMapFood(map, "01/01/2015");
+    fillMapLiquor(map, "01/01/2015");
     });
 
   $('#All').click( function (e) {
     resetMap();
-    fillMapFood(map, Date("01/01/2016 00:00:00 AM"));
-    fillMapLiquor(map, Date("01/01/2016 00:00:00 AM"));
+    fillMapFood(map, "01/01/2016");
+    fillMapLiquor(map, "01/01/2016");
     });
   </script>
 
