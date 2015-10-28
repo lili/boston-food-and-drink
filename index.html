@@ -20,7 +20,6 @@
       <li><img src="icons/drink-icon.png" />Active Boston Liquor License Locations</li>
     </ul>
   </div>
-  <button id="June2006">June 2006</button>
   <button id="Before2007">December 2006</button>
   <button id="June2010">June 2010</button>
   <button id="Before2011">December 2010</button>
@@ -34,46 +33,43 @@
   <script src="js/jquery-2.1.4.js"></script>
   <script src="js/placeMarkers.js"></script>
   <script type="text/javascript">
-  $('#June2006').click( function (e) {
-    resetMap();
-    fillMapFood(map, Date(2006, 7, 1));
-    fillMapLiquor(map, Date(2007, 1, 1));
-    });
+  //buttons that display the number of active establishments open before a given date
+
 
   $('#Before2007').click( function (e) {
     resetMap();
-    fillMapFood(map, Date(2007, 1, 1));
-    fillMapLiquor(map, Date(2007, 1, 1));
+    fillMapFood(map, Date("01/01/2007 00:00:00 AM"));
+    fillMapLiquor(map, Date("01/01/2007 00:00:00 AM"));
     });
 
   $('#June2010').click( function (e) {
     resetMap();
-    fillMapFood(map, Date(2010, 7, 1));
-    fillMapLiquor(map, Date(2007, 1, 1));
+    fillMapFood(map, Date("07/01/2010 00:00:00 AM"));
+    fillMapLiquor(map, Date("07/01/2010 00:00:00 AM"));
     });
 
   $('#Before2011').click( function (e) {
     resetMap();
-    fillMapFood(map, Date(2011, 1, 1));
-    fillMapLiquor(map, Date(2011, 1, 1));
+    fillMapFood(map, Date("01/01/2011 00:00:00 AM"));
+    fillMapLiquor(map, Date("01/01/2011 00:00:00 AM"));
     });
 
   $('#June2014').click( function (e) {
     resetMap();
-    fillMapFood(map, Date(2014, 7, 1));
-    fillMapLiquor(map, Date(2007, 1, 1));
+    fillMapFood(map, Date("07/01/2014 00:00:00 AM"));
+    fillMapLiquor(map, Date("07/01/2014 00:00:00 AM"));
     });
 
   $('#Before2015').click( function (e) {
     resetMap();
-    fillMapFood(map, Date(2015, 1, 1));
-    fillMapLiquor(map, Date(2015, 1, 1));
+    fillMapFood(map, Date("01/01/2015 00:00:00 AM"));
+    fillMapLiquor(map, Date("01/01/2015 00:00:00 AM"));
     });
 
   $('#All').click( function (e) {
     resetMap();
-    fillMapFood(map, Date(2016, 1, 1));
-    fillMapLiquor(map, Date(2016, 1, 1));
+    fillMapFood(map, Date("01/01/2016 00:00:00 AM"));
+    fillMapLiquor(map, Date("01/01/2016 00:00:00 AM"));
     });
   </script>
 

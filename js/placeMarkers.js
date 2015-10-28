@@ -23,7 +23,7 @@ var APP_TOKEN = 'I4DSpFA3uVR5D3j4jSLliGPq4';
 
     function fillMapFood(map, startDate) {
       $.ajax({
-        url: 'https://opendata.socrata.com/resource/kwzk-xvba?$$app_token=' + APP_TOKEN,
+        url: 'https://opendata.socrata.com/resource/kwzk-xvba.json?$$app_token=' + APP_TOKEN,
         type: 'GET',
         dataType: 'json',
         data: {
@@ -36,8 +36,10 @@ var APP_TOKEN = 'I4DSpFA3uVR5D3j4jSLliGPq4';
             var lat = Number(arrayCoord[0].replace("(", ""));
             var lng = Number(arrayCoord[1].replace(")",""));
 
+            var licenseDate = json[i]['licenseadddttm'];
+
             //checks to see if business' license started before given date
-            if (json[i]['licenseadddttm'] < startDate){
+            if (licenseDate < startDate){
             fMarker = new L.marker([lat, lng], {icon: foodIcon}).addTo(markers).bindPopup(json[i]['businessname'] + "<br />" + json[i]['address']);
             markers.addLayers(fMarker);
             }
@@ -65,8 +67,10 @@ var APP_TOKEN = 'I4DSpFA3uVR5D3j4jSLliGPq4';
             var lat = Number(arrayCoord[0].replace("(", ""));
             var lng = Number(arrayCoord[1].replace(")",""));
 
+            var licenseDate = json[i]['issdttm'];
+
             //checks to see if business' license started before given date
-            if (json[i]['issdttm'] < startDate){
+            if (licenseDate < startDate){
             lMarker = new L.marker([lat, lng], {icon: drinkIcon}).addTo(markers).bindPopup(json[i]['businessname']);
             markers.addLayers(lMarker);
             }
